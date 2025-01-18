@@ -8,6 +8,8 @@ module Shapes
   )
 where
 
+import Data.Time (DayOfWeek (Sunday))
+
 data Point = Point Float Float deriving (Show)
 
 data Shape = Circle Point Float | Rectangle Point Point deriving (Show)
@@ -39,3 +41,13 @@ vectorSum (Vector x y z) = x + y + z
 
 vectorProduct :: Vector Float Float Float -> Float
 vectorProduct (Vector x y z) = x * y * z
+
+-- Derived Instances
+data Person = Person
+  { firstName :: String,
+    lastName :: String,
+    age :: Int
+  }
+  deriving (Eq, Show, Read)
+
+data Days = Monday | Tuesday | Wednesday | Thursday | Friday | Saturday | Sunday deriving (Ord, Eq, Enum, Bounded, Show)

@@ -30,3 +30,12 @@ data Car = Car
     year :: Int
   }
   deriving (Show)
+
+-- type constructor
+data Vector a b c = Vector a b c deriving (Show)
+
+vectorSum :: (Ord a, Num a) => Vector a a a -> a
+vectorSum (Vector x y z) = x + y + z
+
+vectorProduct :: Vector Float Float Float -> Float
+vectorProduct (Vector x y z) = x * y * z

@@ -59,3 +59,23 @@ lockers =
       (109, (Taken, "893JJ")),
       (110, (Taken, "99292"))
     ]
+
+-- Recursive Datastructure --
+data Tree a = EmptyTree | Node a (Tree a) (Tree a) deriving (Show, Eq, Read)
+
+singleton' :: (Ord a) => a -> Tree a
+singleton' a = Node a EmptyTree EmptyTree
+
+treeInsert :: (Ord a) => a -> Tree a -> Tree a
+treeInsert a EmptyTree = singleton' a
+treeInsert a (Node x left right)
+  | a == x = Node x left right
+  | a < x = Node x (treeInsert a left) right
+  | a > x = Node x left (treeInsert a right)
+
+treeElem :: (Ord a) => a -> Tree a -> Bool
+treeElem x EmptyTree = False
+treeElem x (Node a left right)
+  | x == a = True
+  | x < a = treeElem x left
+  | otherwise = treeElem x right

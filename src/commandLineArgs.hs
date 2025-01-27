@@ -10,10 +10,17 @@ dispatch =
     ("remove", remove)
   ]
 
+errorExit :: IO ()
+errorExit = return ()
+
 main = do
   (command : args) <- getArgs
-  let Just action = lookup command dispatch
-  action args
+  -- let Just action = lookup command dispatch
+  case lookup command dispatch of
+    Just action -> action args
+    Nothing -> do
+      putStrLn "Command not found. Please try again with a valid command."
+      errorExit
 
 add :: [String] -> IO ()
 add [fileName, task] = appendFile fileName (task ++ ['\n'])

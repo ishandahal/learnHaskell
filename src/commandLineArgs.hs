@@ -21,7 +21,8 @@ add [fileName, task] = appendFile fileName (task ++ ['\n'])
 display :: [String] -> IO ()
 display [fileName] = do
   contents <- readFile fileName
-  mapM_ putStrLn (lines contents)
+  let allTasks = zipWith (\line n -> show n ++ " - " ++ line) (lines contents) [0 ..]
+  mapM_ putStrLn allTasks
 
 remove :: [String] -> IO ()
 remove [fileName, numberString] = do

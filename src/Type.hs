@@ -79,3 +79,27 @@ treeElem x (Node a left right)
   | x == a = True
   | x < a = treeElem x left
   | otherwise = treeElem x right
+
+-- typeclass 102 --
+data TrafficLight = Red | Yellow | Green
+
+instance Eq TrafficLight where
+  Red == Red = True
+  Yellow == Yellow = True
+  Green == Green = True
+  _ == _ = False
+
+instance Show TrafficLight where
+  show Red = "Red light"
+  show Yellow = "Yellow light"
+  show Green = "Green light"
+
+-- instance (Eq m) => Eq (Maybe m) where
+--   Just x == Just y = x == y
+--   Nothing == Nothing = True
+--   _ == _ = False
+
+data Barry t k p = Barry {yabba :: p, dabba :: t k} deriving (Show)
+
+instance Functor (Barry a b) where
+  fmap f (Barry {yabba = x, dabba = y}) = Barry {yabba = f x, dabba = y}
